@@ -28,6 +28,7 @@ define Package/vsftpd/Default
   CATEGORY:=Network
   TITLE:=Fast and secure FTP server
   URL:=https://security.appspot.com/vsftpd.html
+  USERID:=ftp:ftp
 endef
 
 

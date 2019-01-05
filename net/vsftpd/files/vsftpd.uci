@@ -1,0 +1,11 @@
+
+#config service 'dummy'
+#	option enabled '1'
+#	option alt_config_file '/etc/vsftpd.conf'
+#	option listen '1'
+#	option anonymous_enable '0'
+#	option local_enable '1'
+#	option write_enable '1'
+#	option local_umask '022'
+#	option check_shell '0'
+#	option local_root '/home/ftp'
