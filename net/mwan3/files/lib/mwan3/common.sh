@@ -140,8 +140,11 @@ mwan3_init()
 
 	# MMX_DEFAULT should equal MMX_MASK
 	MMX_DEFAULT=$(mwan3_id2mask mmdefault MMX_MASK)
+	echo "$MMX_DEFAULT" > "${MWAN3_STATUS_DIR}/mmx_default"
 	MMX_BLACKHOLE=$(mwan3_id2mask MM_BLACKHOLE MMX_MASK)
+	echo "$MMX_BLACKHOLE" > "${MWAN3_STATUS_DIR}/mmx_blackhole"
 	MMX_UNREACHABLE=$(mwan3_id2mask MM_UNREACHABLE MMX_MASK)
+	echo "$MMX_UNREACHABLE" > "${MWAN3_STATUS_DIR}/mmx_unreachable"
 }
 
 # maps the 1st parameter so it only uses the bits allowed by the bitmask (2nd parameter)
