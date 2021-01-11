@@ -1,0 +1,17 @@
+#!/bin/sh
+#
+# Copyright (C) 2020 TDT AG <development@tdt.de>
+#
+# This is free software, licensed under the GNU General Public License v2.
+# See https://www.gnu.org/licenses/gpl-2.0.txt for more information.
+#
+
+. /lib/mwan3/led-mwan3-iface.sh
+
+network_check () {
+	local cfg="$1"
+	main "$cfg"
+}
+
+config_load network
+config_foreach network_check interface

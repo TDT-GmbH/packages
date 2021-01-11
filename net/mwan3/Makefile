@@ -39,6 +39,33 @@ and manageable. With loadbalancing/failover support for up to 250 wan
 interfaces, connection tracking and an easy to manage traffic ruleset.
 endef
 
+
+define Package/ledtrig-mwan3-iface
+  SECTION:=net
+  CATEGORY:=Network
+  SUBMENU:=Routing and Redirection
+  DEPENDS:=+mwan3
+  TITLE:=Mwan3 iface LED Trigger
+endef
+
+define Package/ledtrig-mwan3-iface/description
+This package contains a led-handler for mwan3-iface.
+endef
+
+
+define Package/ledtrig-mwan3-status
+  SECTION:=tdt
+  CATEGORY:=Network
+  SUBMENU:=Routing and Redirection
+  DEPENDS:=+mwan3
+  TITLE:=Mwan3 status LED Trigger
+endef
+
+define Package/ledtrig-mwan3-status/description
+This package contains a led-handler for mwan3-status.
+endef
+
+
 define Package/mwan3/conffiles
 /etc/config/mwan3
 /etc/mwan3.user
@@ -113,4 +140,36 @@ define Package/mwan3/install
 		$(1)/etc/uci-defaults/
 endef
 
+
+define Package/ledtrig-mwan3-iface/install
+	$(INSTALL_DIR) $(1)/etc/hotplug.d/iface
+	$(INSTALL_BIN) ./files/etc/hotplug.d/iface/led-mwan3-iface \
+	$(1)/etc/hotplug.d/iface/17-led-mwan3-iface
+
+	$(INSTALL_DIR) $(1)/lib/mwan3
+	$(INSTALL_DATA) ./files/lib/mwan3/led-mwan3-iface.sh \
+	$(1)/lib/mwan3
+
+	$(INSTALL_DIR) $(1)/usr/libexec/led-trigger
+	$(INSTALL_BIN) ./files/usr/libexec/led-trigger/mwan3-iface \
+	$(1)/usr/libexec/led-trigger
+endef
+
+
+define Package/ledtrig-mwan3-status/install
+	$(INSTALL_DIR) $(1)/etc/hotplug.d/iface
+	$(INSTALL_BIN) ./files/etc/hotplug.d/iface/led-mwan3-status \
+	$(1)/etc/hotplug.d/iface/17-led-mwan3-status
+
+	$(INSTALL_DIR) $(1)/lib/mwan3
+	$(INSTALL_DATA) ./files/lib/mwan3/led-mwan3-status.sh \
+	$(1)/lib/mwan3
+
+	$(INSTALL_DIR) $(1)/usr/libexec/led-trigger
+	$(INSTALL_BIN) ./files/usr/libexec/led-trigger/mwan3_status \
+	$(1)/usr/libexec/led-trigger
+endef
+
 $(eval $(call BuildPackage,mwan3))
+$(eval $(call BuildPackage,ledtrig-mwan3-iface))
+$(eval $(call BuildPackage,ledtrig-mwan3-status))
